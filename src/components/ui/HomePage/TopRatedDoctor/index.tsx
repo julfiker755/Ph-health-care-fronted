@@ -34,7 +34,7 @@ async function TopRatedDoctors() {
         margin:"30px auto"
       }}>
         <Grid container spacing={2}>
-          {doctors.data.map((doctor: any) => (
+          {doctors?.data?.map((doctor: any) => (
             <Grid item key={doctor.id} md={4}>
               <Card sx={{ maxWidth: 345 }}>
                 <CardActionArea>

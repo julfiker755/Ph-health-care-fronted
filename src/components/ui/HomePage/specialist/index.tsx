@@ -6,6 +6,8 @@ async function Spceialist() {
     const res=await fetch(`${process.env.NEXT_PUBLIC_URL}/specialties/all`,{cache:'no-store'})
     const {data:specialist}=await res.json()
 
+   
+
     
   return (
     <Container>
@@ -20,7 +22,7 @@ async function Spceialist() {
                   <Typography component={"p"} fontWeight={300} fontSize={18}>Experienced Doctors Across All Specialties</Typography>
                </Box>
                <Stack direction={"row"} gap={4} mt={5}>
-                    {specialist.map((item:any)=>(
+                    {specialist?.map((item:any)=>(
                         <Box sx={{
                             flex:1,
                             width:"150px",

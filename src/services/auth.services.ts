@@ -5,8 +5,8 @@ export const storeUserInfo=({accessToken}:{accessToken:string})=>{
   return setToLocalStroage("accessToken",accessToken)
 }
 
-export const getUserInfo=(key:string)=>{
-    const authToken= getToLocalStroage(key)
+export const getUserInfo=(key?:string)=>{
+    const authToken= getToLocalStroage(key || "accessToken")
     if(authToken){
         const decodedData:any=decodedToken(authToken)
         return{

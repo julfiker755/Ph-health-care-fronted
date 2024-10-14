@@ -31,7 +31,7 @@ function LoginPage() {
      const res=await loginUser(values)
      if(res?.data?.accessToken){
       toast.success("User Login Successfull")
-      router.push("/")
+      router.push("/dashboard")
       storeUserInfo({accessToken:res?.data?.accessToken})
      }
     } catch (error:any) {

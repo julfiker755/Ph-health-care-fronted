@@ -15,9 +15,10 @@ type PropsTypes = {
 function PHform({ children, onSubmit, defaultValues, resolver }: PropsTypes) {
     const resolverConfig: ResolverProps = {}
 
-    if (defaultValues) {
+    if(defaultValues) {
         resolverConfig["defaultValues"] = defaultValues
     }
+
     if (resolver) {
         resolverConfig["resolver"] = resolver
     }

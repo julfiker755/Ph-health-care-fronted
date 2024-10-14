@@ -58,11 +58,10 @@ function RegisterPage() {
         // login the user
         const userRes = await loginUser({ email: values.email, password: values.password })
         if (userRes?.data?.accessToken) {
-          router.push("/")
+          router.push("/dashboard")
           storeUserInfo({ accessToken: userRes?.data?.accessToken })
         }
       }
-      console.log(res)
     } catch (error: any) {
       console.error("Error during registration:", error);
       toast.error(error.message || "Registration failed");

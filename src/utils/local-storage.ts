@@ -7,7 +7,7 @@ export const setToLocalStroage=(key:string,token:string)=>{
 }
 
 
-export const getToLocalStroage=(key:string)=>{
+export const getToLocalStroage=(key?:string)=>{
   if(!key || typeof window=== "undefined"){
     return ""
   }
