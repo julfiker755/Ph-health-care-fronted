@@ -6,7 +6,7 @@ async function Spceialist() {
     const res=await fetch(`${process.env.NEXT_PUBLIC_URL}/specialties/all`,{cache:'no-store'})
     const {data:specialist}=await res.json()
 
-   
+   console.log(specialist)
 
     
   return (

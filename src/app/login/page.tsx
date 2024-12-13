@@ -70,7 +70,7 @@ function LoginPage() {
           </Stack>
           <Box>
           <PHform onSubmit={handleLogin} 
-          resolver={zodResolver(validationSchema )}
+          resolver={zodResolver(validationSchema)}
           defaultValues={{
             email:"",
             password:""

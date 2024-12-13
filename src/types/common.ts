@@ -10,6 +10,18 @@ export type IMeta ={
 
 export type user_role=keyof typeof userRole
 
+
+export type ResponseSuccessType={
+    data?:any;
+    meta?:IMeta
+}
+
+export type IGenericErrorResponse={
+    statusCode:number,
+    message:string,
+    errorMessages:IGenericErrorResponse[]
+}
+
 export interface DrawerItem {
     title: string;
     path: string;

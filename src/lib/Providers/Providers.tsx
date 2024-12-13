@@ -9,7 +9,7 @@ import { store } from '@/redux/store'
 function Providers({children}:{children:React.ReactNode}) {
   return (
     <Provider store={store}>
-        <ThemeProvider theme={theme}>
+     <ThemeProvider theme={theme}>
         {children}
     </ThemeProvider>
     </Provider>
