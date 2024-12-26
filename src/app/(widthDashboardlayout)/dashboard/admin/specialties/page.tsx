@@ -1,19 +1,42 @@
 "use client"
-import { Box, Button, Stack, TextField } from '@mui/material'
+import { Box, Button, IconButton, Stack, TextField } from '@mui/material'
 import React, { useState } from 'react'
 import SpceialishModal from './components/SpceialishModal'
-import { useGetAllSpceialtiesQuery } from '@/redux/api/specialtiesApi';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { useDeleteSpceialtyMutation, useGetAllSpceialtiesQuery } from '@/redux/api/specialtiesApi';
+import { DataGrid, GridColDef, GridDeleteIcon } from '@mui/x-data-grid';
+import Image from 'next/image';
+import { toast } from 'sonner';
 
 function Specialties() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const {data,isLoading}=useGetAllSpceialtiesQuery({})
-  console.log(data)
-  const columns: GridColDef[] = [
-    { field: 'title', headerName: 'title', width:150 },
-    // {field:"icon",headerName:"icon",width:150,renderCell:({row})=>{
+  const [deleteSpceialty]=useDeleteSpceialtyMutation()
+ 
+  // hanlde delete
+  const hanldeDelete=async(id:string)=>{
+    try{
+      const res=await deleteSpceialty(id).unwrap()
+      if(res?.id){
+        toast.success("Specialty deleted Successfully!!!s")
+      }
+    }catch(err:any){
+    console.log(err?.message)
+    }
+  }
 
-    // }}
+
+  const columns: GridColDef[] = [
+    { field: 'title', headerName: 'Title', width:400 },
+    {field:"icon",headerName:"Icon",flex:1, renderCell:({row})=>{
+      return <Box my={2}>
+        <Image  src={row.icon} width={30} height={20} alt="row"/>
+      </Box>
+    }},
+    {field:"action",headerName:"Action",flex:1,headerAlign:'center',align:'center', renderCell:({row})=>{
+      return <IconButton onClick={()=>hanldeDelete(row?.id)} aria-label="delete" size="small">
+      <GridDeleteIcon fontSize="small" />
+    </IconButton>
+    }}
   ];
   
  
@@ -26,7 +49,7 @@ function Specialties() {
             <SpceialishModal open={isModalOpen} setOpen={setIsModalOpen}></SpceialishModal>
             <TextField size='small' placeholder='search Specialties'/>
         </Stack>
-       {!isLoading ? <Box>
+       {!isLoading ? <Box my={2}>
         <DataGrid
         rows={data}
         columns={columns}

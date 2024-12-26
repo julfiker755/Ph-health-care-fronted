@@ -18,8 +18,15 @@ const specialtiesApi=baseApi.injectEndpoints({
                 method:"GET",
             }),
          providesTags:[tagTypes.specialties]
-        })
-    }),
+        }),
+        deleteSpceialty:build.mutation({
+            query:(id)=>({
+                url:`specialties/${id}`,
+                method:"DELETE",
+            }),
+            invalidatesTags:[tagTypes.specialties]
+        }),
+    })
 })
 
-export const {useCreateSpceialtyMutation,useGetAllSpceialtiesQuery}=specialtiesApi
+export const {useCreateSpceialtyMutation,useGetAllSpceialtiesQuery,useDeleteSpceialtyMutation}=specialtiesApi
