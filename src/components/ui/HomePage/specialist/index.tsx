@@ -5,9 +5,6 @@ import React from 'react'
 async function Spceialist() {
     const res=await fetch(`${process.env.NEXT_PUBLIC_URL}/specialties/all`,{cache:'no-store'})
     const {data:specialist}=await res.json()
-
-   console.log(specialist)
-
     
   return (
     <Container>
@@ -40,7 +37,7 @@ async function Spceialist() {
                                 border:"1px solid blue",
                             }
                         }} key={item.id}>
-                             <Image src={item?.icon} width={100} height={100}  alt="lastimage"/>
+                          {item?.icon &&  <Image src={item?.icon} width={100} height={100}  alt="lastimage"/> }
                              <Typography component={"p"} mt={2} fontWeight={600} fontSize={18}>{item.title}</Typography>
                         </Box>
                     ))}

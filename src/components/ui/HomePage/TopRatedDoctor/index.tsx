@@ -39,7 +39,7 @@ async function TopRatedDoctors() {
               <Card sx={{ maxWidth: 345 }}>
                 <CardActionArea>
                    <Box>
-                      <Image src={doctor.profilePhoto} width={500} height={200} alt="doctors"/>
+                      <Image src={doctor.profilePhoto || ""} width={500} height={200} alt="doctors"/>
                    </Box>
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">

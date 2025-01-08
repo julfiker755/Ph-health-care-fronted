@@ -22,7 +22,7 @@ function HeroSection() {
                 top:"-90px",
                 left:"-120px"
             }}>
-                 <Image src={assert.svgs.grid} alt='grid'/>
+                 <Image src={assert.svgs.grid} width={100} height={100} alt='grid'/>
             </Box>
             <Typography variant='h3' component={"h1"} fontWeight={600} >Healthier Hearts</Typography>
             <Typography variant='h3' component={"h1"} fontWeight={600} >Come From</Typography>
