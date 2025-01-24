@@ -53,6 +53,7 @@ function Specialties() {
         <DataGrid
         rows={data}
         columns={columns}
+        hideFooter={true}
       />
         </Box>: <h1>Loading..</h1>}
     </Box>

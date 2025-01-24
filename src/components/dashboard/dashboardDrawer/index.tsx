@@ -9,6 +9,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Sideber from '../sideber';
+import { useGetSingleUserQuery } from '@/redux/api/userApi';
+import { Avatar, Badge, Stack } from "@mui/material";
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import AccountMenu from '../AccountMenu';
 
 const drawerWidth = 240;
 
@@ -16,7 +20,10 @@ const drawerWidth = 240;
 export default function DashboardDrawer({children}:{children:React.ReactNode}) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
+  const {isLoading,data}=useGetSingleUserQuery({})
+  
 
+  
   const handleDrawerClose = () => {
     setIsClosing(true);
     setMobileOpen(false);
@@ -57,15 +64,33 @@ export default function DashboardDrawer({children}:{children:React.ReactNode}) {
           >
             <MenuIcon />
           </IconButton>
+          <Box  sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              width: "100%",
+            }}>
+
            <Box >
            <Typography variant="body2" noWrap component="div" mr={1} color='gray'>
-            Hi,Tanmoy Parvez
+            Hi, {isLoading ? 'Loading...': data?.name}
           </Typography>
           <Typography variant="body2" noWrap component="div" color='primary.main'>
              Welcome To,PH Health Care !
           </Typography>
           
            </Box>
+           <Stack direction="row" gap={3}>
+              <Badge badgeContent={1} color="primary">
+                <IconButton sx={{ background: "#ffffff" }}>
+                  <NotificationsNoneIcon color="action" />
+                </IconButton>
+              </Badge>
+              <Avatar alt={data?.name} src={data?.profilePhoto} />
+              <AccountMenu />
+            </Stack>
+
+          </Box>
         </Toolbar>
       </AppBar>
       <Box

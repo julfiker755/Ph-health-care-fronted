@@ -1,3 +1,4 @@
+import { instance as axiosInstance } from "@/helpers/axios/axiosInstance"
 import { decodedToken } from "@/utils/jwt"
 import { getToLocalStroage, removeToLocalStroage, setToLocalStroage } from "@/utils/local-storage"
 
@@ -26,4 +27,13 @@ export const isLoggedIn=()=>{
 
 export const removeUser=()=>{
    return removeToLocalStroage("accessToken")
+}
+
+export const getNewAccessToken=async()=>{
+    return await  axiosInstance ({
+      url:"http://localhost:5000/api/v1/auth/refresh-token",
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      withCredentials:true
+    })
 }

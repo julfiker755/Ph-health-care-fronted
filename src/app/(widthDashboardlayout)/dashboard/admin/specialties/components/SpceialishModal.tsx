@@ -22,7 +22,6 @@ export default function SpceialishModal({ open,setOpen}:TProps) {
   const hanldeFormSubmit=async(values:FieldValues)=>{
     const data=modifyPayload(values)
     try{
-      console.log(data)
       const res=await createSpceialty(data).unwrap()
       if(res?.id){
         toast.success("Spceialty Create Successfull")

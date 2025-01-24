@@ -1,5 +1,6 @@
+import { getNewAccessToken } from "@/services/auth.services";
 import { IGenericErrorResponse, ResponseSuccessType } from "@/types";
-import { getToLocalStroage } from "@/utils/local-storage";
+import { getToLocalStroage, setToLocalStroage } from "@/utils/local-storage";
 import axios from "axios";
 
 
@@ -17,7 +18,6 @@ instance.interceptors.request.use(function (config) {
         config.headers.Authorization=accessToken
     }
 
-    
     return config;
   }, function (error) {
     // Do something with request error
@@ -35,15 +35,28 @@ instance.interceptors.response.use(
 
   }
     return responseObject;
-  }, function (error) {
+  }, async function (error:any) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
-    const responseObject:IGenericErrorResponse={
-      statusCode:error?.response?.data?.statusCode || 500,
-      message:error?.response?.data?.message || "something went wrong",
-      errorMessages:error?.response?.data?.message
+    const config=error.config
+    console.log(config)
+
+    if(error?.response?.status === 500 && !config?.sent){
+      config.sent=true
+      const response=await getNewAccessToken()
+      const accessToken=response?.data.accessToken
+      config.headers["Authorization"]=accessToken
+      setToLocalStroage("accessToken",accessToken)
+      return instance(config)
+    }else {
+      const responseObject:IGenericErrorResponse={
+        statusCode:error?.response?.data?.statusCode || 500,
+        message:error?.response?.data?.message || "something went wrong",
+        errorMessages:error?.response?.data?.message
+      }
+      return responseObject
     }
-    return responseObject
+    
     // return Promise.reject(error);
   });
 
