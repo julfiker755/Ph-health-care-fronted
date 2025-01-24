@@ -3,7 +3,6 @@ import PHform from '@/components/form/PHform'
 import PHformInput from '@/components/form/PHformInput'
 import PHSelectField from '@/components/form/PHFromSelectField'
 import PHFullScreenModal from '@/components/shared/PhModal/PhFullScreenModal'
-import PHModal from '@/components/shared/PhModal/PhModal'
 import { useCreateDoctorMutation } from '@/redux/api/doctorApi'
 import { Gender } from '@/types'
 import { modifyPayload } from '@/utils/modifyPayload'
@@ -29,7 +28,7 @@ const [createDoctor]=useCreateDoctorMutation()
           contactNumber: "",
           address: "",
           registrationNumber: "",
-          gender: "" || "MALE",
+          gender:"MALE",
           experience: 0,
           appointmentFee: 0,
           qualification: "",
